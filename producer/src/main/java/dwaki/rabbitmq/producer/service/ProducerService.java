@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.amqp.rabbit.core.RabbitTemplate;
 import org.springframework.stereotype.Service;
 
+import dwaki.rabbitmq.producer.model.Due;
 import dwaki.rabbitmq.producer.utils.ProducerConstants;
 
 @Service
@@ -21,17 +22,17 @@ public class ProducerService {
 		this.rabbitTemplate = rabbitTemplate;
 	}
 
-	public String sendMessage(String message) {
+	public String sendMessage(Due due) {
 
 		try {
 
-			rabbitTemplate.convertAndSend(exchange, rountingKey, message);
-			LOG.info(String.format("This message sent to queue %s", message));
+			rabbitTemplate.convertAndSend(exchange, rountingKey, due);
+			LOG.info(String.format("This message sent to queue %s", due));
 			return "Message Sent";
 
 		} catch (Exception e) {
 
-			LOG.info(String.format("This message failed to send to queue %s", message));
+			LOG.info(String.format("This message failed to send to queue %s", due));
 			return "Message Failed to Send";
 
 		}

@@ -5,9 +5,10 @@ import lombok.ToString;
 
 @Data
 @ToString(includeFieldNames = true)
-public class Product {
+public class Due {
 
-	private String productName;
-	private Integer numberOfItems;
+	private String companyName;
+	private Double dueAmount;
+	private String dueDate;
 
 }

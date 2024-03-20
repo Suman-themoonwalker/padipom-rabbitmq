@@ -2,8 +2,8 @@ package dwaki.rabbitmq.producer.utils;
 
 public class ProducerConstants {
 	
-	public static String EXCHANGE_NAME = "supermarket";
-	public static String QUEUE_NAME = "product_details";
-	public static String ROUTING_KEY = "product_queue";
+	public static final String EXCHANGE_NAME = "due_notification_exchange";
+	public static final String QUEUE_NAME = "company_a";
+	public static final String ROUTING_KEY = "company_a";
 
 }
