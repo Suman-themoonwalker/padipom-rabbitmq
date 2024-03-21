@@ -6,12 +6,15 @@ import org.springframework.amqp.rabbit.annotation.RabbitListener;
 import org.springframework.stereotype.Controller;
 
 import dwaki.rabbitmq.consumer.model.Due;
+import dwaki.rabbitmq.consumer.service.MailService;
 import dwaki.rabbitmq.consumer.utils.ConsumerConstants;
 
 @Controller
 public class ConsumerController {
 
 	private static final Logger LOG = LoggerFactory.getLogger(ConsumerController.class);
+	
+	public MailService service = new MailService();
 
 	@RabbitListener(queues = { ConsumerConstants.QUEUE_NAME })
 	public void consumeCompanyADue(Due companyADue) {
@@ -19,6 +22,8 @@ public class ConsumerController {
 		LOG.info(String.format("This is the consumed product details %s", companyADue));
 		
 		LOG.info(String.format("The Due Amount for the company A is %s", companyADue.getDueAmount().toString()));
+		
+		service.sendEmail(companyADue);
 
 	}
 
